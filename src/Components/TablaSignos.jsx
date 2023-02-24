@@ -3,6 +3,7 @@ import Datos from "../palabras.json";
 
 const TablaSignos = ({ palabras }) => {
   const [info, setInfo] = useState([]);
+  const [num, setNum ] = useState([]); 
   // const ComparadorFunc = (word) => {
   //   const DatosJson = Datos;
   //   const palabras = word.split(" ");
@@ -19,9 +20,17 @@ const TablaSignos = ({ palabras }) => {
   const Comp = (word) => {
     const DatosJson = Datos;
     const palabras = word.split(/[\n\s]+/);
-    const wordFiltered = DatosJson.filter((item) =>
+    const wordFiltered = DatosJson.filter((item) =>//detecta las palabras reservadas; 
       palabras.includes(item.palabra)
     );
+
+    const otrasPalabras = palabras.filter((element) => { // detecta los numeros; 
+      //validamos si es un numero o no
+      if (!isNaN(element)) {
+          return element; 
+      }
+    });
+    setNum(otrasPalabras); 
     setInfo(wordFiltered);
   };
 
